@@ -7,7 +7,10 @@
       alt="Ubook logo with pink coloring"
       >
 
-      <Modal :showModal="!this.showNewContactModal" />
+      <Modal
+      :showModal="this.showNewContactModal"
+      @updateModalVisibility="onClickChild"
+      />
 
       <div class="input-icon">
         <input
@@ -24,7 +27,25 @@
     </div>
 
     <div class="home-content-wrapper">
-      <div class="no-contacts-wrapper">
+
+      <table v-if="this.contacts.length > 0">
+        <tr>
+          <th></th>
+          <th>Contatos</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th></th>
+        </tr>
+        <tr v-for="(contact, index) in this.contacts" :key="index">
+          <td>{{ contact.name.charAt(0) }}</td>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.phone }}</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <div class="no-contacts-wrapper" v-else>
         <img
         id="book"
         src="../assets/imgs/ic-book.svg"
@@ -37,6 +58,7 @@
         type="button"
         name="criar-contato"
         class="add-button"
+        @click="showNewContactModal = !showNewContactModal"
         >
           + Criar contato
         </button>
@@ -57,8 +79,23 @@ export default {
   },
   data: function () {
     return {
-      showNewContactModal: false,
-      contacts: {}
+      showNewContactModal: false
+    }
+  },
+  methods: {
+    onClickChild (value) {
+      this.showNewContactModal = value
+    }
+  },
+  created () {},
+  computed: {
+    contacts () {
+      return this.$store.getters.contactsList
+    }
+  },
+  watch: {
+    contacts (newContacts, oldContacts) {
+      console.log('deu certo')
     }
   }
 }

@@ -9,11 +9,11 @@
       </div>
       <div class="form-wrapper">
         <label for="name">Nome</label>
-        <input type="text" name="name">
+        <input type="text" name="name" v-model="name">
         <label for="email">E-mail</label>
-        <input type="text" name="email">
-        <label for="telephone">Telefone</label>
-        <input type="text" name="telephone">
+        <input type="text" name="email" v-model="email">
+        <label for="phone">Telefone</label>
+        <input type="text" name="phone" v-model="phone">
       </div>
 
       <hr>
@@ -23,6 +23,7 @@
         type="button"
         name="cancelar-contato"
         class="modal-button-text"
+        @click="updateModalVisibility"
         >
           Cancelar
         </button>
@@ -30,6 +31,7 @@
         type="button"
         name="salvar-contato"
         class="modal-button"
+        @click="createNewContact"
         >
           Salvar
         </button>
@@ -40,10 +42,32 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      name: '',
+      email: '',
+      phone: ''
+    }
+  },
   props: {
     showModal: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    createNewContact () {
+      const contact = {
+        name: this.name,
+        email: this.email,
+        phone: this.phone
+      }
+
+      this.$store.commit('addNewContact', contact)
+      this.updateModalVisibility()
+    },
+    updateModalVisibility () {
+      this.$emit('updateModalVisibility', false)
     }
   }
 }
