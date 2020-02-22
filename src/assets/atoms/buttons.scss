@@ -32,6 +32,7 @@
   }
 
   &.disabled {
-    opacity: 0.32;
+    opacity: .32;
+    cursor: not-allowed;
   }
 }

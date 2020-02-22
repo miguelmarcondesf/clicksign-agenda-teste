@@ -87,7 +87,6 @@ export default {
       this.showNewContactModal = value
     }
   },
-  created () {},
   computed: {
     contacts () {
       return this.$store.getters.contactsList

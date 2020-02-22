@@ -31,7 +31,9 @@
         type="button"
         name="salvar-contato"
         class="modal-button"
+        :class="this.btnDisabledClass"
         @click="createNewContact"
+        :disabled="btnDisabled"
         >
           Salvar
         </button>
@@ -46,7 +48,8 @@ export default {
     return {
       name: '',
       email: '',
-      phone: ''
+      phone: '',
+      btnDisabledClass: 'disabled'
     }
   },
   props: {
@@ -68,6 +71,24 @@ export default {
     },
     updateModalVisibility () {
       this.$emit('updateModalVisibility', false)
+    }
+  },
+  computed: {
+    btnDisabled () {
+      if ((this.name || this.email || this.phone) === '') {
+        return true
+      }
+
+      return false
+    }
+  },
+  watch: {
+    btnDisabled (newValue, oldValue) {
+      if (newValue === true) {
+        this.btnDisabledClass = 'disabled'
+      } else {
+        this.btnDisabledClass = ''
+      }
     }
   }
 }
