@@ -10,6 +10,7 @@ body {
   letter-spacing:  var(--letter-spacing);
 }
 
-input {
-  font-family:     var(--font-primary);
+input,
+label {
+  font-family: var(--font-primary);
 }

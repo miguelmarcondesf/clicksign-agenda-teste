@@ -7,6 +7,8 @@
       alt="Ubook logo with pink coloring"
       >
 
+      <Modal :showModal="!this.showNewContactModal" />
+
       <div class="input-icon">
         <input
         type="text"
@@ -46,16 +48,25 @@
 </template>
 
 <script>
+import Modal from '@/components/Modal'
 
 export default {
   name: 'Home',
   components: {
+    Modal
+  },
+  data: function () {
+    return {
+      showNewContactModal: false,
+      contacts: {}
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../assets/atoms/buttons';
+@import '../assets/atoms/input';
 
 .home {
   height: 100vh;
@@ -80,12 +91,8 @@ export default {
       min-height: 100%;
 
       input {
-        height: 32px;
         width: 72vw;
-        border-radius: 4px;
-        background-color: var(--pale-lilac);
         padding: 0 8px;
-        border: 0;
       }
 
       img {
