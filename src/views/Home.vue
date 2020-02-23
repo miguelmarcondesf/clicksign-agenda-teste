@@ -26,9 +26,8 @@
 
     </div>
 
-    <div class="home-content-wrapper">
-
-      <table v-if="this.contacts.length > 0">
+    <div class="home-content-wrapper" v-if="this.contacts.length > 0">
+      <table >
         <tr>
           <th></th>
           <th>Contatos</th>
@@ -37,33 +36,37 @@
           <th></th>
         </tr>
         <tr v-for="(contact, index) in this.contacts" :key="index">
-          <td>{{ contact.name.charAt(0) }}</td>
+          <td>
+            <span>
+              {{ contact.name.charAt(0) }}
+            </span>
+          </td>
           <td>{{ contact.name }}</td>
           <td>{{ contact.email }}</td>
           <td>{{ contact.phone }}</td>
           <td></td>
         </tr>
       </table>
+    </div>
 
-      <div class="no-contacts-wrapper" v-else>
-        <img
-        id="book"
-        src="../assets/imgs/ic-book.svg"
-        alt="A opened book illustration with grey coloring"
-        >
+    <div class="no-contacts-wrapper" v-else>
+      <img
+      id="book"
+      src="../assets/imgs/ic-book.svg"
+      alt="A opened book illustration with grey coloring"
+      >
 
-        <p class="no-contact-text">Nenhum contato foi criado ainda.</p>
+      <p class="no-contact-text">Nenhum contato foi criado ainda.</p>
 
-        <button
-        type="button"
-        name="criar-contato"
-        class="add-button"
-        @click="showNewContactModal = !showNewContactModal"
-        >
-          + Criar contato
-        </button>
+      <button
+      type="button"
+      name="criar-contato"
+      class="add-button"
+      @click="showNewContactModal = !showNewContactModal"
+      >
+        + Criar contato
+      </button>
 
-      </div>
     </div>
 
   </div>
@@ -145,21 +148,115 @@ export default {
   .home-content-wrapper {
     display: flex;
     flex-direction: column;
+    max-height: 93.75vh;
+    padding: 16px;
+
+    table {
+      width: 100%;
+      border-radius: 4px;
+      height: auto;
+      background-color: var(--white-two);
+      border: solid 1px var(--white);
+      border-collapse: collapse;
+
+      th {
+        padding: 16px 0;
+        font-family: 'Roboto';
+        font-size: 13px;
+        color: var(--bluey-grey);
+
+        &:nth-child(1) {
+          width: 48px;
+        }
+      }
+
+      tr {
+        text-align: left;
+        background-color: var(--white-two);
+        border: solid 1px var(--white);
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--dark);
+        transition: .5s;
+
+        &:nth-child(1) {
+          &:hover {
+            background-color: var(--white-two);
+          }
+        }
+
+        &:hover {
+          background-color: var(--very-light-pink);
+        }
+
+        td {
+          padding: 12px 0;
+
+          &:nth-child(1) {
+            display: flex;
+            justify-content: center;
+
+            span {
+              background-color: #f55a5a;
+              height: 24px;
+              width: 24px;
+              border-radius: 50%;
+              display: flex;
+              text-align: center;
+              justify-content: center;
+              align-items: center;
+              font-size: 16px;
+              color: var(--white-two);
+              text-transform: capitalize;
+
+              &:nth-child(8n+1) {
+                background-color: #fa8d68;
+              }
+
+              &:nth-child(8n+2) {
+                background-color: var(--pale-olive-green);
+              }
+
+              &:nth-child(8n+3) {
+                background-color: var(--sky-blue);
+              }
+
+              &:nth-child(8n+4) {
+                background-color: #fab668;
+              }
+
+              &:nth-child(8n+5) {
+                background-color: #8368fa;
+              }
+
+              &:nth-child(8n+6) {
+                background-color: #fa68b5;
+              }
+
+              &:nth-child(8n+7) {
+                background-color: #5fe2c4;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-contacts-wrapper {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    max-height: 93.75vh;
 
-    .no-contacts-wrapper {
-      text-align: center;
+    #book {
+      width: 16.45vw;
+      height: auto;
+      margin-top: 10vh;
+    }
 
-      #book {
-        width: 16.45vw;
-        height: auto;
-      }
-
-      p {
-        margin: 24px 0;
-      }
+    p {
+      margin: 24px 0;
     }
   }
 }
