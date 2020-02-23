@@ -10,10 +10,15 @@
       <div class="form-wrapper">
         <label for="name">Nome</label>
         <input type="text" name="name" v-model="name">
+        <span v-show="nameError">{{ nameError }}</span>
+
         <label for="email">E-mail</label>
-        <input type="text" name="email" v-model="email">
+        <input type="email" name="email" v-model="email">
+        <span v-show="emailError">{{ emailError }}</span>
+
         <label for="phone">Telefone</label>
-        <input type="text" name="phone" v-model="phone">
+        <input type="text" name="phone" v-model="phone" maxlength="11">
+        <span v-show="phoneError">{{ phoneError }}</span>
       </div>
 
       <hr>
@@ -47,8 +52,11 @@ export default {
   data: function () {
     return {
       name: '',
+      nameError: '',
       email: '',
+      emailError: '',
       phone: '',
+      phoneError: '',
       btnDisabledClass: 'disabled'
     }
   },
@@ -68,6 +76,10 @@ export default {
   },
   methods: {
     createNewContact () {
+      if (this.emailValidation(this.email) !== true) {
+        return
+      }
+
       if (this.contactObj) {
         const contactInfo = {
           name: this.name,
@@ -100,6 +112,10 @@ export default {
       this.name = ''
       this.email = ''
       this.phone = ''
+    },
+    emailValidation (email) {
+      var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return regex.test(String(email).toLowerCase())
     }
   },
   computed: {
@@ -125,9 +141,12 @@ export default {
         this.email = this.contactObj.email
         this.phone = this.contactObj.phone
       }
+    },
+    phone (newValue, oldValue) {
+      this.phone = newValue.replace(/[^0-9]/g, '')
+        .replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
     }
-  },
-  updated () {}
+  }
 }
 </script>
 
@@ -191,6 +210,9 @@ export default {
       input {
         margin-bottom: 16px;
         border-radius: 4px;
+        padding: 0 8px;
+        color: var(--dark);
+        font-size: 14px;
       }
     }
 
