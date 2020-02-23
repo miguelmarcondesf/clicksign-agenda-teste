@@ -18,7 +18,7 @@ exports[`Home.vue listing with contacts matchs snapshot 1`] = `
         <th>Telefone</th>
         <th></th>
       </tr>
-      <tr>
+      <tr id="0" class="">
         <td><span>
             B
           </span></td>
@@ -27,7 +27,7 @@ exports[`Home.vue listing with contacts matchs snapshot 1`] = `
         <td>999999999</td>
         <td class="action-icons"><img src="../assets/imgs/ic-edit.svg" alt="A pencil icon"> <img src="../assets/imgs/ic-delete.svg" alt="A trash can icon"></td>
       </tr>
-      <tr>
+      <tr id="1" class="">
         <td><span>
             C
           </span></td>
