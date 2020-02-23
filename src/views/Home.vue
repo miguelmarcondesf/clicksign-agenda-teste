@@ -22,6 +22,7 @@
       :contactId="this.editContactId"
       :contactObj="this.editContactObj"
       @updateModalVisibility="onChildShowCreateContactModal"
+      @updateNewContactHighlight="onChildNewContactHighlight"
       />
 
       <ContactDeleteModal
@@ -53,8 +54,13 @@
           <th>Telefone</th>
           <th></th>
         </tr>
-        <tr v-for="(contact, index) in this.contacts" :key="index">
-          <td>
+        <tr
+        v-for="(contact, index) in this.contacts"
+        :key="index"
+        :class="[ newContactHighlight === index + 1 ? 'new-contact' : '']"
+        :id="index"
+        >
+          <td >
             <span>
               {{ contact.name.charAt(0) }}
             </span>
@@ -117,7 +123,8 @@ export default {
       showContactDeleteModal: false,
       editContactId: null,
       editContactObj: null,
-      contactDeleteId: null
+      contactDeleteId: null,
+      newContactHighlight: false
     }
   },
   methods: {
@@ -130,6 +137,17 @@ export default {
       this.showContactDeleteModal = value
       this.editContactId = null
       this.editContactObj = null
+    },
+    onChildNewContactHighlight (value) {
+      if (value === true) {
+        this.newContactHighlight = this.contacts.length
+      } else {
+        this.newContactHighlight = value + 1
+      }
+
+      setTimeout(() => {
+        this.newContactHighlight = false
+      }, 10000)
     },
     openContactForm (editContactId = '') {
       if (editContactId !== '') {
@@ -252,6 +270,10 @@ export default {
         }
 
         &:hover {
+          background-color: var(--very-light-pink);
+        }
+
+        &.new-contact {
           background-color: var(--very-light-pink);
         }
 
