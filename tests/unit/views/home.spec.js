@@ -104,5 +104,15 @@ describe('Home.vue', () => {
       expect(wrapper.vm.showNewContactModal).toBe(true)
       expect(wrapper.findAll('.modal-wrapper').exists()).toBe(true)
     })
+
+    it('shows a modal if delete contact icon was clicked', async () => {
+      expect(wrapper.vm.showContactDeleteModal).toBe(false)
+
+      wrapper.find('img[alt="A trash can icon"]').trigger('click')
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.vm.showContactDeleteModal).toBe(true)
+      expect(wrapper.findAll('.modal-wrapper').exists()).toBe(true)
+    })
   })
 })

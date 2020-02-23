@@ -17,6 +17,9 @@ export default {
       }
 
       state.contactsList[contactInfo.id] = contact
+    },
+    deleteContact (state, contactId) {
+      state.contactsList.splice(contactId, 1)
     }
   },
   getters: {

@@ -21,7 +21,13 @@
       :showModal="this.showNewContactModal"
       :contactId="this.editContactId"
       :contactObj="this.editContactObj"
-      @updateModalVisibility="onChildShowModal"
+      @updateModalVisibility="onChildShowCreateContactModal"
+      />
+
+      <ContactDeleteModal
+      :showModal="this.showContactDeleteModal"
+      :contactId="this.contactDeleteId"
+      @updateModalVisibility="onChildShowContactDeleteModal"
       />
 
       <div class="input-icon">
@@ -65,6 +71,7 @@
             <img
             src="../assets/imgs/ic-delete.svg"
             alt="A trash can icon"
+            @click="openContactDeleteForm(index)"
             >
           </td>
         </tr>
@@ -96,22 +103,31 @@
 
 <script>
 import Modal from '@/components/Modal'
+import ContactDeleteModal from '@/components/ContactDeleteModal'
 
 export default {
   name: 'Home',
   components: {
-    Modal
+    Modal,
+    ContactDeleteModal
   },
   data: function () {
     return {
       showNewContactModal: false,
+      showContactDeleteModal: false,
       editContactId: null,
-      editContactObj: null
+      editContactObj: null,
+      contactDeleteId: null
     }
   },
   methods: {
-    onChildShowModal (value) {
+    onChildShowCreateContactModal (value) {
       this.showNewContactModal = value
+      this.editContactId = null
+      this.editContactObj = null
+    },
+    onChildShowContactDeleteModal (value) {
+      this.showContactDeleteModal = value
       this.editContactId = null
       this.editContactObj = null
     },
@@ -123,6 +139,13 @@ export default {
       }
 
       this.showNewContactModal = !this.showNewContactModal
+    },
+    openContactDeleteForm (contactDeleteId = '') {
+      if (contactDeleteId !== '') {
+        this.contactDeleteId = contactDeleteId
+      }
+
+      this.showContactDeleteModal = !this.showContactDeleteModal
     }
   },
   computed: {

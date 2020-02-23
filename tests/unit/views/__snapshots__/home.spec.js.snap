@@ -6,6 +6,7 @@ exports[`Home.vue listing with contacts matchs snapshot 1`] = `
       + Criar contato
     </button>
     <!---->
+    <!---->
     <div class="input-icon"><input type="text" name="search" placeholder="Buscar..." aria-label="Busque pela agenda"> <img src="../assets/imgs/ic-search.svg" alt=""></div>
   </div>
   <div class="home-content-wrapper">
@@ -43,6 +44,7 @@ exports[`Home.vue listing with contacts matchs snapshot 1`] = `
 exports[`Home.vue listing without any contact matchs snapshot 1`] = `
 <div class="home">
   <div class="header"><img id="logo" src="../assets/imgs/ic-logo.svg" alt="Ubook logo with pink coloring">
+    <!---->
     <!---->
     <!---->
     <div class="input-icon"><input type="text" name="search" placeholder="Buscar..." aria-label="Busque pela agenda"> <img src="../assets/imgs/ic-search.svg" alt=""></div>
