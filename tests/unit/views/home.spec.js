@@ -48,7 +48,7 @@ describe('Home.vue', () => {
       await wrapper.vm.$nextTick()
 
       expect(wrapper.vm.showNewContactModal).toBe(true)
-      expect(wrapper.findAll('modal-stub').exists()).toBe(false)
+      expect(wrapper.findAll('.modal-wrapper').exists()).toBe(true)
     })
   })
 
@@ -93,6 +93,16 @@ describe('Home.vue', () => {
 
       expect(firstRow.findAll('td').at(1).text()).toEqual('Bruce Wayne')
       expect(secondRow.findAll('td').at(1).text()).toEqual('Clark Kent')
+    })
+
+    it('shows a modal if edit contact icon was clicked', async () => {
+      expect(wrapper.vm.showNewContactModal).toBe(false)
+
+      wrapper.find('img[alt="A pencil icon"]').trigger('click')
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.vm.showNewContactModal).toBe(true)
+      expect(wrapper.findAll('.modal-wrapper').exists()).toBe(true)
     })
   })
 })

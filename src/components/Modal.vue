@@ -56,22 +56,43 @@ export default {
     showModal: {
       type: Boolean,
       default: false
+    },
+    contactId: {
+      type: Number,
+      default: null
+    },
+    contactObj: {
+      type: Object,
+      default: null
     }
   },
   methods: {
     createNewContact () {
-      const contact = {
-        name: this.name,
-        email: this.email,
-        phone: this.phone
+      if (this.contactObj) {
+        const contactInfo = {
+          name: this.name,
+          email: this.email,
+          phone: this.phone,
+          id: this.contactId
+        }
+
+        this.$store.commit('updateContact', contactInfo)
+      } else {
+        const contactInfo = {
+          name: this.name,
+          email: this.email,
+          phone: this.phone
+        }
+
+        this.$store.commit('addNewContact', contactInfo)
       }
 
-      this.$store.commit('addNewContact', contact)
       this.updateModalVisibility()
       this.clearForm()
     },
     updateModalVisibility () {
       this.$emit('updateModalVisibility', false)
+      this.clearForm()
     },
     clearForm () {
       this.name = ''
@@ -95,8 +116,16 @@ export default {
       } else {
         this.btnDisabledClass = ''
       }
+    },
+    contactObj (newValue, oldValue) {
+      if (newValue) {
+        this.name = this.contactObj.name
+        this.email = this.contactObj.email
+        this.phone = this.contactObj.phone
+      }
     }
-  }
+  },
+  updated () {}
 }
 </script>
 

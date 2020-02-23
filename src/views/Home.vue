@@ -11,7 +11,7 @@
       type="button"
       name="criar-contato"
       class="add-button"
-      @click="showNewContactModal = !showNewContactModal"
+      @click="openContactForm()"
       v-if="this.contacts.length > 0"
       >
         + Criar contato
@@ -19,7 +19,9 @@
 
       <Modal
       :showModal="this.showNewContactModal"
-      @updateModalVisibility="onClickChild"
+      :contactId="this.editContactId"
+      :contactObj="this.editContactObj"
+      @updateModalVisibility="onChildShowModal"
       />
 
       <div class="input-icon">
@@ -54,7 +56,17 @@
           <td>{{ contact.name }}</td>
           <td>{{ contact.email }}</td>
           <td>{{ contact.phone }}</td>
-          <td></td>
+          <td class="action-icons">
+            <img
+            src="../assets/imgs/ic-edit.svg"
+            alt="A pencil icon"
+            @click="openContactForm(index)"
+            >
+            <img
+            src="../assets/imgs/ic-delete.svg"
+            alt="A trash can icon"
+            >
+          </td>
         </tr>
       </table>
     </div>
@@ -92,12 +104,25 @@ export default {
   },
   data: function () {
     return {
-      showNewContactModal: false
+      showNewContactModal: false,
+      editContactId: null,
+      editContactObj: null
     }
   },
   methods: {
-    onClickChild (value) {
+    onChildShowModal (value) {
       this.showNewContactModal = value
+      this.editContactId = null
+      this.editContactObj = null
+    },
+    openContactForm (editContactId = '') {
+      if (editContactId !== '') {
+        const contactEdit = Object.assign({}, this.contacts[editContactId])
+        this.editContactId = editContactId
+        this.editContactObj = contactEdit
+      }
+
+      this.showNewContactModal = !this.showNewContactModal
     }
   },
   computed: {
@@ -181,6 +206,10 @@ export default {
 
         &:nth-child(1) {
           width: 48px;
+        }
+
+        &:last-child {
+          width: 80px;
         }
       }
 
@@ -270,6 +299,18 @@ export default {
               color: var(--white-two);
               text-transform: capitalize;
             }
+          }
+        }
+      }
+
+      .action-icons {
+        img {
+          height: 16px;
+          width: auto;
+          margin-right: 24px;
+
+          &:hover {
+            cursor: pointer;
           }
         }
       }
