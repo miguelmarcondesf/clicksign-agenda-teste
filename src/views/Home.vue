@@ -7,6 +7,16 @@
       alt="Ubook logo with pink coloring"
       >
 
+      <button
+      type="button"
+      name="criar-contato"
+      class="add-button"
+      @click="showNewContactModal = !showNewContactModal"
+      v-if="this.contacts.length > 0"
+      >
+        + Criar contato
+      </button>
+
       <Modal
       :showModal="this.showNewContactModal"
       @updateModalVisibility="onClickChild"
@@ -122,6 +132,10 @@ export default {
     align-items: center;
     justify-content: space-between;
 
+    button {
+      padding: 8px 16px;
+    }
+
     #logo {
       height: 50%;
       width: auto;
@@ -189,6 +203,54 @@ export default {
           background-color: var(--very-light-pink);
         }
 
+        &:nth-child(8n+0) {
+          span {
+            background-color: #f55a5a;
+          }
+        }
+
+        &:nth-child(8n+1) {
+          span {
+            background-color: #fa8d68;
+          }
+        }
+
+        &:nth-child(8n+2) {
+          span {
+            background-color: var(--pale-olive-green);
+          }
+        }
+
+        &:nth-child(8n+3) {
+          span {
+            background-color: var(--sky-blue);
+          }
+        }
+
+        &:nth-child(8n+4) {
+          span {
+            background-color: #fab668;
+          }
+        }
+
+        &:nth-child(8n+5) {
+          span {
+            background-color: #8368fa;
+          }
+        }
+
+        &:nth-child(8n+6) {
+          span {
+            background-color: #fa68b5;
+          }
+        }
+
+        &:nth-child(8n+7) {
+          span {
+            background-color: #5fe2c4;
+          }
+        }
+
         td {
           padding: 12px 0;
 
@@ -197,7 +259,6 @@ export default {
             justify-content: center;
 
             span {
-              background-color: #f55a5a;
               height: 24px;
               width: 24px;
               border-radius: 50%;
@@ -208,34 +269,6 @@ export default {
               font-size: 16px;
               color: var(--white-two);
               text-transform: capitalize;
-
-              &:nth-child(8n+1) {
-                background-color: #fa8d68;
-              }
-
-              &:nth-child(8n+2) {
-                background-color: var(--pale-olive-green);
-              }
-
-              &:nth-child(8n+3) {
-                background-color: var(--sky-blue);
-              }
-
-              &:nth-child(8n+4) {
-                background-color: #fab668;
-              }
-
-              &:nth-child(8n+5) {
-                background-color: #8368fa;
-              }
-
-              &:nth-child(8n+6) {
-                background-color: #fa68b5;
-              }
-
-              &:nth-child(8n+7) {
-                background-color: #5fe2c4;
-              }
             }
           }
         }
