@@ -175,9 +175,9 @@ export default {
       return []
     }
   },
-  watch: {
-    contacts (newContacts, oldContacts) {
-      console.log('deu certo')
+  mounted () {
+    if (localStorage.getItem('contactsList')) {
+      this.$store.commit('updateContactsList')
     }
   }
 }
