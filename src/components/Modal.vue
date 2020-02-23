@@ -68,9 +68,15 @@ export default {
 
       this.$store.commit('addNewContact', contact)
       this.updateModalVisibility()
+      this.clearForm()
     },
     updateModalVisibility () {
       this.$emit('updateModalVisibility', false)
+    },
+    clearForm () {
+      this.name = ''
+      this.email = ''
+      this.phone = ''
     }
   },
   computed: {
