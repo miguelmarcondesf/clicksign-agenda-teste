@@ -8,6 +8,11 @@
   color: var(--salmon);
   padding: 12px 16px;
   font-weight: 500;
+
+  &:hover {
+    background-color: lighten(#dbff90, 10%);
+    cursor: pointer;
+  }
 }
 
 .modal-button {
@@ -22,6 +27,11 @@
   padding: 8px 16px;
   margin: 0 8px;
 
+  &:hover {
+    background-color: lighten(#fa7268, 10%);
+    cursor: pointer;
+  }
+
   &-text {
     font-family: 'Roboto';
     font-size: 14px;
@@ -29,6 +39,10 @@
     color: var(--salmon);
     background-color: transparent;
     border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &.disabled {
