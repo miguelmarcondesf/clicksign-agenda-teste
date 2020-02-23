@@ -19,29 +19,29 @@ describe('Home.vue', () => {
       localVue
     })
 
-    it('should match snapshot', () => {
+    it('matchs snapshot', () => {
       expect(wrapper).toMatchSnapshot()
     })
 
-    it('should have a logo', () => {
+    it('has a logo', () => {
       expect(wrapper.findAll('img#logo').length).toEqual(1)
     })
 
-    it('should have a search bar', () => {
+    it('has a search bar', () => {
       expect(wrapper.findAll('input[name=search]').length).toEqual(1)
     })
 
-    it('should have a message about no contacts created', () => {
+    it('has a message about no contacts created', () => {
       expect(wrapper.findAll('img#book').length).toEqual(1)
       expect(wrapper.find('p').text()).toEqual('Nenhum contato foi criado ainda.')
     })
 
-    it('should have a button to add new contacts', () => {
+    it('has a button to add new contacts', () => {
       expect(wrapper.findAll('button[name=criar-contato]').length).toEqual(1)
       expect(wrapper.find('button[name=criar-contato]').text()).toEqual('+ Criar contato')
     })
 
-    it('should show modal if add contact button was clicked', async () => {
+    it('shows a modal if add contact button was clicked', async () => {
       expect(wrapper.vm.showNewContactModal).toBe(false)
 
       wrapper.find('button[name=criar-contato]').trigger('click')
@@ -52,7 +52,7 @@ describe('Home.vue', () => {
     })
   })
 
-  describe('listing with contact', () => {
+  describe('listing with contacts', () => {
     const store = new Vuex.Store({
       state: {
         contactsList: [
@@ -60,8 +60,8 @@ describe('Home.vue', () => {
             name: 'Bruce Wayne',
             phone: '999999999'
           },
-          { email: 'bruce@wayne.com',
-            name: 'Bruce Wayne',
+          { email: 'clark@kent.com',
+            name: 'Clark Kent',
             phone: '999999999'
           }
         ]
@@ -77,14 +77,22 @@ describe('Home.vue', () => {
       localVue
     })
 
-    it('should match snapshot', () => {
+    it('matchs snapshot', () => {
       expect(wrapper).toMatchSnapshot()
     })
 
-    it('renders a table using a real Vuex store', () => {
+    it('has a table using a real Vuex store', () => {
       expect(wrapper.findAll("table").length).toBe(1)
+    })
 
+    it('has a table with three rows using a real Vuex store', () => {
+      expect(wrapper.findAll("tr").length).toBe(3)
 
+      const firstRow = wrapper.findAll('tr').at(1)
+      const secondRow = wrapper.findAll('tr').at(2)
+
+      expect(firstRow.findAll('td').at(1).text()).toEqual('Bruce Wayne')
+      expect(secondRow.findAll('td').at(1).text()).toEqual('Clark Kent')
     })
   })
 })
