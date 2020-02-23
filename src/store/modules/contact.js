@@ -12,6 +12,7 @@ export default {
   },
   getters: {
     contactsList (state) {
+      console.log(state.contactsList)
       return state.contactsList
     }
   },

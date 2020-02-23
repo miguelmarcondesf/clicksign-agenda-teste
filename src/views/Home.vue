@@ -89,7 +89,11 @@ export default {
   },
   computed: {
     contacts () {
-      return this.$store.getters.contactsList
+      if (this.$store.getters.contactsList !== undefined) {
+        return this.$store.getters.contactsList
+      }
+
+      return []
     }
   },
   watch: {
