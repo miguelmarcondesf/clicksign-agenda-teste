@@ -58,7 +58,7 @@
         <tr
         v-for="(contact) in this.filteredContacts"
         :key="contact.id"
-        :class="[ newContactHighlight === contact.id + 1 ? 'new-contact' : '']"
+        :class="[ newContactHighlight === contact.id ? 'new-contact' : '']"
         :id="contact.id"
         >
           <td>
@@ -144,11 +144,8 @@ export default {
       this.editContactObj = null
     },
     onChildNewContactHighlight (value) {
-      if (value === true) {
-        this.newContactHighlight = this.contacts.length
-      } else {
-        this.newContactHighlight = value + 1
-      }
+      this.newContactHighlight = value
+      this.search = ''
 
       setTimeout(() => {
         this.newContactHighlight = false

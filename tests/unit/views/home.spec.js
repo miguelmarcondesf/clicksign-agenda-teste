@@ -38,7 +38,7 @@ describe('Home.vue', () => {
 
     it('has a button to add new contacts', () => {
       expect(wrapper.findAll('button[name=criar-contato]').length).toEqual(1)
-      expect(wrapper.find('button[name=criar-contato]').text()).toEqual('+ Criar contato')
+      expect(wrapper.find('button[name=criar-contato]').text()).toEqual('Criar contato')
     })
 
     it('shows a modal if add contact button was clicked', async () => {
@@ -58,11 +58,13 @@ describe('Home.vue', () => {
         contactsList: [
           { email: 'bruce@wayne.com',
             name: 'Bruce Wayne',
-            phone: '999999999'
+            phone: '999999999',
+            id: 0
           },
           { email: 'clark@kent.com',
             name: 'Clark Kent',
-            phone: '999999999'
+            phone: '999999999',
+            id: 1
           }
         ]
       },

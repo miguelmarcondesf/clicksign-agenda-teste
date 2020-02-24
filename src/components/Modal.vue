@@ -101,7 +101,7 @@ export default {
         }
 
         this.$store.commit('updateContact', contactInfo)
-        this.$emit('updateNewContactHighlight', this.contactId)
+        this.$emit('updateNewContactHighlight', this.contactObj.id)
       } else {
         const contactInfo = {
           name: this.name,
@@ -110,7 +110,9 @@ export default {
         }
 
         this.$store.commit('addNewContact', contactInfo)
-        this.$emit('updateNewContactHighlight', true)
+
+        const contactsList = this.$store.getters.contactsList
+        this.$emit('updateNewContactHighlight', contactsList[contactsList.length - 1].id)
       }
 
       this.updateModalVisibility()

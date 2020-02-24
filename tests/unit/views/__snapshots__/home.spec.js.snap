@@ -50,8 +50,8 @@ exports[`Home.vue listing without any contact matchs snapshot 1`] = `
     <div class="input-icon"><input type="text" name="search" placeholder="Buscar..." aria-label="Busque pela agenda"> <img src="../assets/imgs/ic-search.svg" alt=""></div>
   </div>
   <div class="no-contacts-wrapper"><img id="book" src="../assets/imgs/ic-book.svg" alt="A opened book illustration with grey coloring">
-    <p class="no-contact-text">Nenhum contato foi criado ainda.</p> <button type="button" name="criar-contato" class="add-button">
-      + Criar contato
+    <p class="no-contact-text">Nenhum contato foi criado ainda.</p> <button type="button" name="criar-contato" class="add-button"><img src="../assets/imgs/ic-plus.svg" alt="A plus icon">
+      Criar contato
     </button>
   </div>
 </div>
