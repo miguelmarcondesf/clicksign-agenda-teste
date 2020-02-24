@@ -56,10 +56,10 @@
           <th></th>
         </tr>
         <tr
-        v-for="(contact, index) in this.filteredContacts"
-        :key="index"
-        :class="[ newContactHighlight === index + 1 ? 'new-contact' : '']"
-        :id="index"
+        v-for="(contact) in this.filteredContacts"
+        :key="contact.id"
+        :class="[ newContactHighlight === contact.id + 1 ? 'new-contact' : '']"
+        :id="contact.id"
         >
           <td>
             <span>
@@ -73,12 +73,12 @@
             <img
             src="../assets/imgs/ic-edit.svg"
             alt="A pencil icon"
-            @click="openContactForm(index)"
+            @click="openContactForm(contact.id)"
             >
             <img
             src="../assets/imgs/ic-delete.svg"
             alt="A trash can icon"
-            @click="openContactDeleteForm(index)"
+            @click="openContactDeleteForm(contact.id)"
             >
           </td>
         </tr>
@@ -156,8 +156,10 @@ export default {
     },
     openContactForm (editContactId = '') {
       if (editContactId !== '') {
-        const contactEdit = Object.assign({}, this.contacts[editContactId])
-        this.editContactId = editContactId
+        const index = this.contacts.findIndex(contact => contact.id === editContactId)
+        const contactEdit = Object.assign({}, this.contacts[index])
+
+        this.editContactId = index
         this.editContactObj = contactEdit
       }
 

@@ -96,7 +96,8 @@ export default {
           name: this.name,
           email: this.email,
           phone: this.phone,
-          id: this.contactId
+          id: this.contactObj.id,
+          arrayId: this.contactId
         }
 
         this.$store.commit('updateContact', contactInfo)
@@ -167,8 +168,10 @@ export default {
       }
     },
     phone (newValue, oldValue) {
-      this.phone = newValue.replace(/[^0-9]/g, '')
-        .replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+      if (newValue !== undefined && newValue.length === 11) {
+        this.phone = newValue.replace(/[^0-9]/g, '')
+          .replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+      }
     }
   }
 }

@@ -3,10 +3,13 @@ export default {
     contactsList: [],
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    contactId: 0
   },
   mutations: {
     addNewContact (state, contact) {
+      contact.id = state.contactId
+      state.contactId += 1
       state.contactsList.push(contact)
       localStorage.setItem('contactsList', JSON.stringify(state.contactsList))
     },
@@ -14,18 +17,22 @@ export default {
       const contact = {
         name: contactInfo.name,
         email: contactInfo.email,
-        phone: contactInfo.phone
+        phone: contactInfo.phone,
+        id: contactInfo.id
       }
 
-      state.contactsList[contactInfo.id] = contact
+      state.contactsList[contactInfo.arrayId] = contact
       localStorage.setItem('contactsList', JSON.stringify(state.contactsList))
     },
     deleteContact (state, contactId) {
-      state.contactsList.splice(contactId, 1)
+      const index = state.contactsList.findIndex(contact => contact.id === contactId)
+      state.contactsList.splice(index, 1)
+
       localStorage.setItem('contactsList', JSON.stringify(state.contactsList))
     },
     updateContactsList (state) {
       state.contactsList = JSON.parse(localStorage.getItem('contactsList'))
+      state.contactId = state.contactsList[state.contactsList.length - 1].id + 1
     }
   },
   getters: {
