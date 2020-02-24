@@ -89,6 +89,7 @@ export default {
 
   .modal-card {
     width: 30vw;
+    min-width: 380px;
     height: auto;
     border-radius: 16px;
     box-shadow: 0 16px 10px 0 rgba(0, 0, 0, 0.16);
@@ -119,6 +120,7 @@ export default {
 
     .buttons-form-wrapper {
       float: right;
+      margin: 8px 8px 0 0;
     }
   }
 }

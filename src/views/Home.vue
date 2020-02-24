@@ -100,7 +100,11 @@
       class="add-button"
       @click="showNewContactModal = !showNewContactModal"
       >
-        + Criar contato
+        <img
+        src="../assets/imgs/ic-plus.svg"
+        alt="A plus icon"
+        >
+        Criar contato
       </button>
     </div>
 
@@ -256,6 +260,7 @@ export default {
         font-family: 'Roboto';
         font-size: 13px;
         color: var(--bluey-grey);
+        width: 29%;
 
         &:nth-child(1) {
           width: 48px;
