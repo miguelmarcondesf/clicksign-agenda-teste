@@ -10,15 +10,22 @@
       <div class="form-wrapper">
         <label for="name">Nome</label>
         <input type="text" name="name" v-model="name">
-        <span v-show="nameError">{{ nameError }}</span>
 
-        <label for="email">E-mail</label>
-        <input type="email" name="email" v-model="email">
+        <label
+        for="email"
+        :class="[ emailError ? 'error' : '']">
+          E-mail
+        </label>
+        <input
+        type="email"
+        name="email"
+        v-model="email"
+        :class="[ emailError ? 'error' : '']"
+        >
         <span v-show="emailError">{{ emailError }}</span>
 
         <label for="phone">Telefone</label>
         <input type="text" name="phone" v-model="phone" maxlength="11">
-        <span v-show="phoneError">{{ phoneError }}</span>
       </div>
 
       <hr>
@@ -52,11 +59,9 @@ export default {
   data: function () {
     return {
       name: '',
-      nameError: '',
       email: '',
       emailError: '',
       phone: '',
-      phoneError: '',
       btnDisabledClass: 'disabled'
     }
   },
@@ -76,7 +81,7 @@ export default {
   },
   methods: {
     createNewContact () {
-      if (this.emailValidation(this.email) !== true) {
+      if (this.emailValidation(this.email) === false) {
         return
       }
 
@@ -112,10 +117,23 @@ export default {
       this.name = ''
       this.email = ''
       this.phone = ''
+      this.nameError = ''
+      this.emailError = ''
+      this.phoneError = ''
     },
     emailValidation (email) {
+      if (email.length < 1) {
+        this.emailError = ''
+        return true
+      }
+
       var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return regex.test(String(email).toLowerCase())
+      const validEmail = regex.test(String(email).toLowerCase())
+
+      if (validEmail !== true) {
+        this.emailError = 'E-mail inválido!'
+        return false
+      }
     }
   },
   computed: {
@@ -199,20 +217,35 @@ export default {
     .form-wrapper {
       display: flex;
       flex-direction: column;
-      padding: 24px;
+      padding: 8px 24px 24px 24px;
 
       label {
         margin-bottom: 4px;
         font-size: 14px;
         color: var(--dark);
+        margin-top: 16px;
+
+        &.error {
+          color: var(--salmon);
+        }
       }
 
       input {
-        margin-bottom: 16px;
         border-radius: 4px;
         padding: 0 8px;
         color: var(--dark);
         font-size: 14px;
+
+        &.error {
+          color: var(--salmon);
+          border-color: var(--salmon);
+        }
+      }
+
+      span {
+        font-size: 12px;
+        margin-top: 4px;
+        color: var(--salmon);
       }
     }
 
