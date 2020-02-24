@@ -231,6 +231,10 @@ export default {
       input {
         width: 72vw;
         padding: 0 8px;
+
+        @media only screen and (max-width: 1180px) {
+          width: 60vw;
+        }
       }
 
       img {
