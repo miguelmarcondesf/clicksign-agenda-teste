@@ -37,6 +37,7 @@
         name="search"
         placeholder="Buscar..."
         aria-label="Busque pela agenda"
+        v-model="search"
         >
         <img
         src="../assets/imgs/ic-search.svg"
@@ -55,12 +56,12 @@
           <th></th>
         </tr>
         <tr
-        v-for="(contact, index) in this.contacts"
+        v-for="(contact, index) in this.filteredContacts"
         :key="index"
         :class="[ newContactHighlight === index + 1 ? 'new-contact' : '']"
         :id="index"
         >
-          <td >
+          <td>
             <span>
               {{ contact.name.charAt(0) }}
             </span>
@@ -101,7 +102,6 @@
       >
         + Criar contato
       </button>
-
     </div>
 
   </div>
@@ -124,7 +124,8 @@ export default {
       editContactId: null,
       editContactObj: null,
       contactDeleteId: null,
-      newContactHighlight: false
+      newContactHighlight: false,
+      search: ''
     }
   },
   methods: {
@@ -173,6 +174,17 @@ export default {
       }
 
       return []
+    },
+    filteredContacts () {
+      if (this.search) {
+        const that = this
+
+        return this.contacts.filter(contact => {
+          return contact.name.toLowerCase().includes(that.search.toLowerCase())
+        })
+      }
+
+      return this.contacts
     }
   },
   mounted () {
