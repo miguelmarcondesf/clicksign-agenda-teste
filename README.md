@@ -1,11 +1,11 @@
 # clicksign-agenda-teste
 
 A project for Clicksign Front-end hiring process.
-An contact book, where the user will be able to see a list of his contacts, possibility to add new ones, edit and delete them.
+An contact book, where the user will be able to see a list of his contacts, add new ones, edit and delete them.
 
 ## Prerequisites
 
-[Node](https://nodejs.org) Version 8.9 or above (8.11.0+ recommended).
+[Node](https://nodejs.org) Version 8.9 or above (8.11.0+ recommended)
 
 ## Built With
 
